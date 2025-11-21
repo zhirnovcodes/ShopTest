@@ -11,18 +11,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a17e6814c1c83824f9ff66bbbe415bfe, type: 3}
   m_Name: ShopConfig
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Shop::ShopConfig
   Bundles:
-  - Name: Remove 10 health
+  - Name: Go to factory for 5 gold
     Actions:
-    - {fileID: 11400000, guid: 4891e6ed51610ad4586080f6bebf9b90, type: 2}
-  - Name: Add 10 gold
+    - {fileID: 11400000, guid: f4717bc7124d95d48bd7a46df1e240a3, type: 2}
+    - {fileID: 11400000, guid: 5ad42722e68ef5d47b419a51d2a4eb38, type: 2}
+  - Name: Get 10 Gold for 10 health
     Actions:
     - {fileID: 11400000, guid: ce72ac0cb3ce2104aa78c34404e3b930, type: 2}
-  - Name: Remove 1 min of VIP
-    Actions:
-    - {fileID: 11400000, guid: 0fd008bf478935e4f9d52e4a2b2395e5, type: 2}
-  - Name: Teleport to factory
-    Actions:
-    - {fileID: 11400000, guid: 5ad42722e68ef5d47b419a51d2a4eb38, type: 2}
     - {fileID: 11400000, guid: 4891e6ed51610ad4586080f6bebf9b90, type: 2}
+  - Name: Get 20 health for 1 min of VIP time
+    Actions:
+    - {fileID: 11400000, guid: bf1185c99820ebe449aed92970870c3f, type: 2}
+    - {fileID: 11400000, guid: 0fd008bf478935e4f9d52e4a2b2395e5, type: 2}
+  - Name: Go home, but get 30 mins of VIP time
+    Actions:
+    - {fileID: 11400000, guid: 7df7b6b4f6b4bde47933ec9c16028ceb, type: 2}
+    - {fileID: 11400000, guid: e5591358fdbbca64191eb13934f2c303, type: 2}

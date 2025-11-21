@@ -4,7 +4,7 @@ public class ShopContext : MonoBehaviour
 {
     public ShopConfigModel ShopModel { get; private set; }
     public IPurchaseController PurchaseController { get; private set; }
-    public IPlayerDataObserver PlayerObserver { get; private set; }
+    public IPlayerDataChangeHandler PlayerObserver { get; private set; }
     public ShopPreferences ShopPreferences { get; private set; }
     public ShopSceneManager SceneManager { get; private set; }
 
@@ -15,7 +15,7 @@ public class ShopContext : MonoBehaviour
 
     public void Initialize(ShopConfigModel shopModel,
         IPurchaseController purchaseController,
-        IPlayerDataObserver playerObserver,
+        IPlayerDataChangeHandler playerObserver,
         ShopPreferences shopPreferences,
         ShopSceneManager sceneManager)
     {

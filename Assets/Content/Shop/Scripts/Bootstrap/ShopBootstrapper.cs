@@ -12,7 +12,7 @@ public class ShopBootstrapper : MonoBehaviour
     private ShopSceneManager Scenes;
     private ShopConfigModel ShopModel;
     private IPurchaseController PurchaseController;
-    private IPlayerDataObserver PlayerObserver;
+    private IPlayerDataChangeHandler PlayerObserver;
     private ShopPreferences ShopPreferences;
     private IPlayerData PlayerData;
     private IPlayerDataEnumerator PlayerAllData;
@@ -59,7 +59,7 @@ public class ShopBootstrapper : MonoBehaviour
     {
         PlayerData = new PlayerData();
         PlayerAllData = PlayerData as IPlayerDataEnumerator;
-        PlayerObserver = PlayerData as IPlayerDataObserver;
+        PlayerObserver = PlayerData as IPlayerDataChangeHandler;
     }
 
     private void CreatePurchaseController()

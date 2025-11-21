@@ -5,7 +5,7 @@ public class CardScenePresenter
     public event Action CloseButtonClicked = () => { };
 
     private readonly IPurchaseController PurchaseController;
-    private readonly IPlayerDataObserver DataObserver;
+    private readonly IPlayerDataChangeHandler DataObserver;
     private readonly CardSceneView View;
     private readonly int ItemIndex;
     private ShopCardView Card;
@@ -15,7 +15,7 @@ public class CardScenePresenter
         IPurchaseController purchaseController,
         CardSceneView view,
         int itemIndex,
-        IPlayerDataObserver dataObserver)
+        IPlayerDataChangeHandler dataObserver)
     {
         PurchaseController = purchaseController;
         DataObserver = dataObserver;

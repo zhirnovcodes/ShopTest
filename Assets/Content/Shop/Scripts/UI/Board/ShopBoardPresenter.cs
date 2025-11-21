@@ -7,12 +7,12 @@ public class ShopBoardPresenter : IDisposable
     private ShopConfigModel Config;
     private ShopBoardView View;
     private IPurchaseController PurchaseController;
-    private IPlayerDataObserver DataObserver;
+    private IPlayerDataChangeHandler DataObserver;
 
     public ShopBoardPresenter(ShopConfigModel config, 
         ShopBoardView view, 
         IPurchaseController purchaseController,
-        IPlayerDataObserver dataObserver)
+        IPlayerDataChangeHandler dataObserver)
     {
         Config = config;
         View = view;

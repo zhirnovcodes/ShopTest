@@ -26,6 +26,8 @@ public class ShopBootstrapper : MonoBehaviour
         CreateShopContext();
         CreateShopUI();
         CreateHUD();
+
+        ShowUI();
     }
 
     private void CreateShopContext()
@@ -68,9 +70,9 @@ public class ShopBootstrapper : MonoBehaviour
 
     private void CreateShopUI()
     {
-        var presenter = new ShopBoardPresenter(ShopModel, View, PurchaseController, PlayerObserver);
-        presenter.Enable();
-        presenter.InfoButtonClicked += HandleInfoButtonClicked;
+        Presenter = new ShopBoardPresenter(ShopModel, View, PurchaseController, PlayerObserver);
+        Presenter.CreateCards();
+        Presenter.InfoButtonClicked += HandleInfoButtonClicked;
     }
 
     private void HandleInfoButtonClicked(int cardIndex)
@@ -87,5 +89,10 @@ public class ShopBootstrapper : MonoBehaviour
     private async Task ShowCardSceneAsync(int cardIndex)
     {
         await SceneManager.LoadSceneAsync("CardInfo", LoadSceneMode.Additive);
+    }
+
+    private void ShowUI()
+    {
+        Presenter.Enable();
     }
 }

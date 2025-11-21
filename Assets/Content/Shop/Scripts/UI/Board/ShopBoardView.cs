@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopBoardView : MonoBehaviour
+public class ShopBoardView : MonoBehaviour, IDisposable
 {
     public ShopCardView ShopCardPrefab;
 
@@ -18,13 +19,6 @@ public class ShopBoardView : MonoBehaviour
     {
         Content.SetActive(false);
 
-        var count = GetCardsCount();
-        for (int i = 0; i < count; i++)
-        {
-            var button = Cards[Cards.Count - 1];
-            Cards.RemoveAt(Cards.Count - 1);
-            GameObject.Destroy(button.gameObject);
-        }
     }
 
     public ShopCardView AddCard()
@@ -44,5 +38,17 @@ public class ShopBoardView : MonoBehaviour
     public int GetCardsCount()
     {
         return Cards.Count;
+    }
+
+    public void Dispose()
+    {
+        var count = GetCardsCount();
+        for (int i = 0; i < count; i++)
+        {
+            var button = Cards[i];
+            GameObject.Destroy(button.gameObject);
+        }
+
+        Cards.Clear();
     }
 }

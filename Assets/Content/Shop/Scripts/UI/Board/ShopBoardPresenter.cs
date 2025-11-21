@@ -1,6 +1,6 @@
 using System;
 
-public class ShopBoardPresenter
+public class ShopBoardPresenter : IDisposable
 {
     public event Action<int> InfoButtonClicked = (int index) => { };
 
@@ -23,8 +23,6 @@ public class ShopBoardPresenter
     public void Enable()
     {
         View.Enable();
-
-        AddCards();
 
         PurchaseController.PurchaseComplete += HandlePurchaseComplete;
         DataObserver.DataChanged += HandleDataChanged;
@@ -51,7 +49,7 @@ public class ShopBoardPresenter
         UpdateAllStates();
     }
 
-    private void AddCards()
+    public void CreateCards()
     {
         for (int i = 0; i < Config.GetItemsCount(); i++)
         {
@@ -111,5 +109,10 @@ public class ShopBoardPresenter
     private void HandleDataChanged()
     {
         UpdateAllStates();
+    }
+
+    public void Dispose()
+    {
+        View.Dispose();
     }
 }

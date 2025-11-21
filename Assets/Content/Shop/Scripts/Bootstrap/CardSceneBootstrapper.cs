@@ -5,12 +5,10 @@ public class CardSceneBootstrapper : MonoBehaviour
 {
     private CardScenePresenter Presenter;
 
-    public void Run(ShopConfigModel shopConfigModel,
-        IPurchaseController purchaseController,
-        int cardIndex,
-        IPlayerDataObserver dataObserver)
+    void Start()
     {
-        CreateCardSceneView(shopConfigModel, purchaseController, cardIndex, dataObserver);
+        var shopContext = FindFirstObjectByType<ShopContext>();
+        CreateCardSceneView(shopContext.ShopModel, shopContext.PurchaseController, shopContext.ShopPreferences.SelectedCardIndex, shopContext.PlayerObserver);
     }
 
     private void CreateCardSceneView(ShopConfigModel shopConfigModel,

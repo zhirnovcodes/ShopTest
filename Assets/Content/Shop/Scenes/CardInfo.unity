@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 818789503}
-  - component: {fileID: 818789502}
+  - component: {fileID: 818789504}
   m_Layer: 0
   m_Name: Bootstrapper
   m_TagString: Untagged
@@ -309,18 +309,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &818789502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818789501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff65bd7217b72f4bb8a9c8dbf40e0fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Shop::CardSceneBootstrapper
 --- !u!4 &818789503
 Transform:
   m_ObjectHideFlags: 0
@@ -336,6 +324,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &818789504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818789501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f4705ebcc80e146b64c2e373c63343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Shop::CardSceneBootstrapper
 --- !u!1 &822536387
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &822536388
 RectTransform:
   m_ObjectHideFlags: 0
@@ -452,7 +452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8073556476092326405, guid: 2ce40d3292af4e445b87ba80f5c02238, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 8073556476092326405, guid: 2ce40d3292af4e445b87ba80f5c02238, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

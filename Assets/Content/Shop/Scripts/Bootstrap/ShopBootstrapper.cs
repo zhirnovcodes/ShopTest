@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,19 +10,34 @@ public class ShopBootstrapper : MonoBehaviour
     public HUDView HUDView;
 
     private ShopConfigModel ShopModel;
+    private IPurchaseController PurchaseController;
+    private IPlayerDataObserver PlayerObserver;
+    private ShopPreferences ShopPreferences;
     private IPlayerData PlayerData;
     private IPlayerAllData PlayerAllData;
-    private IPlayerDataObserver PlayerObserver;
-    private IPurchaseController PurchaseController;
     private ShopBoardPresenter Presenter;
 
     void Start()
     {
+        CreateShopPrefs();
         CreateConfigModel();
         CreatePlayerData();
         CreatePurchaseController();
+        CreateShopContext();
         CreateShopUI();
         CreateHUD();
+    }
+
+    private void CreateShopContext()
+    {
+        var go = new GameObject();
+        var cont = go.AddComponent<ShopContext>();
+        cont.Initialize(ShopModel, PurchaseController, PlayerObserver, ShopPreferences);
+    }
+
+    private void CreateShopPrefs()
+    {
+        ShopPreferences = new ShopPreferences();
     }
 
     private void CreateConfigModel()
@@ -64,13 +80,12 @@ public class ShopBootstrapper : MonoBehaviour
 
     private void ShowCardScene(int cardIndex)
     {
+        ShopPreferences.SelectedCardIndex = cardIndex;
         _ = ShowCardSceneAsync(cardIndex);
     }
 
     private async Task ShowCardSceneAsync(int cardIndex)
     {
-        await SceneManager.LoadSceneAsync("CardPresent", LoadSceneMode.Additive);
-        var bootstrapper = FindFirstObjectByType<CardSceneBootstrapper>();
-        bootstrapper.Run(ShopModel, PurchaseController, cardIndex, PlayerObserver);
+        await SceneManager.LoadSceneAsync("CardInfo", LoadSceneMode.Additive);
     }
 }

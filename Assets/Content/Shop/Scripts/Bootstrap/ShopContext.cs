@@ -6,6 +6,7 @@ public class ShopContext : MonoBehaviour
     public IPurchaseController PurchaseController;
     public IPlayerDataObserver PlayerObserver;
     public ShopPreferences ShopPreferences;
+    public ShopSceneManager SceneManager;
 
     private void Awake()
     {
@@ -15,11 +16,13 @@ public class ShopContext : MonoBehaviour
     public void Initialize(ShopConfigModel shopModel,
         IPurchaseController purchaseController,
         IPlayerDataObserver playerObserver,
-        ShopPreferences shopPreferences)
+        ShopPreferences shopPreferences,
+        ShopSceneManager sceneManager)
     {
         ShopModel = shopModel;
         PurchaseController = purchaseController;
         PlayerObserver = playerObserver;
         ShopPreferences = shopPreferences;
+        SceneManager = sceneManager;
     }
 }

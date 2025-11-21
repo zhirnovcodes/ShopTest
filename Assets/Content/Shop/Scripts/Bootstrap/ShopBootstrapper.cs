@@ -9,6 +9,7 @@ public class ShopBootstrapper : MonoBehaviour
     public ShopBoardView View;
     public HUDView HUDView;
 
+    private ShopSceneManager Scenes;
     private ShopConfigModel ShopModel;
     private IPurchaseController PurchaseController;
     private IPlayerDataObserver PlayerObserver;
@@ -19,6 +20,7 @@ public class ShopBootstrapper : MonoBehaviour
 
     void Start()
     {
+        CreateSceneManager();
         CreateShopPrefs();
         CreateConfigModel();
         CreatePlayerData();
@@ -28,13 +30,19 @@ public class ShopBootstrapper : MonoBehaviour
         CreateHUD();
 
         ShowUI();
+        SubscribeOnSceneEvents();
+    }
+
+    private void CreateSceneManager()
+    {
+        Scenes = new ShopSceneManager();
     }
 
     private void CreateShopContext()
     {
         var go = new GameObject();
         var cont = go.AddComponent<ShopContext>();
-        cont.Initialize(ShopModel, PurchaseController, PlayerObserver, ShopPreferences);
+        cont.Initialize(ShopModel, PurchaseController, PlayerObserver, ShopPreferences, Scenes);
     }
 
     private void CreateShopPrefs()
@@ -83,16 +91,21 @@ public class ShopBootstrapper : MonoBehaviour
     private void ShowCardScene(int cardIndex)
     {
         ShopPreferences.SelectedCardIndex = cardIndex;
-        _ = ShowCardSceneAsync(cardIndex);
-    }
-
-    private async Task ShowCardSceneAsync(int cardIndex)
-    {
-        await SceneManager.LoadSceneAsync("CardInfo", LoadSceneMode.Additive);
+        Scenes.OpenSceneOnTop(SceneNames.CardInfo);
     }
 
     private void ShowUI()
     {
         Presenter.Enable();
+    }
+
+    private void SubscribeOnSceneEvents()
+    {
+        Scenes.SceneChanged += HandleSceneChanged;
+    }
+
+    private void HandleSceneChanged()
+    {
+        Presenter.UpdateAllStates();
     }
 }

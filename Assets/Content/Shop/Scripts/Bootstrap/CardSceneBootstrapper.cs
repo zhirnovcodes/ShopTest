@@ -4,18 +4,20 @@ using UnityEngine.SceneManagement;
 public class CardSceneBootstrapper : MonoBehaviour
 {
     private CardScenePresenter Presenter;
+    private ShopSceneManager SceneManager;
 
     void Start()
     {
         var shopContext = FindFirstObjectByType<ShopContext>();
-        CreateCardSceneView(shopContext.ShopModel, shopContext.PurchaseController, shopContext.ShopPreferences.SelectedCardIndex, shopContext.PlayerObserver);
+        CreateCardSceneView(shopContext);
+
+        SceneManager = shopContext.SceneManager;
     }
 
-    private void CreateCardSceneView(ShopConfigModel shopConfigModel,
-        IPurchaseController purchaseController, int cardIndex, IPlayerDataObserver dataObserver)
+    private void CreateCardSceneView(ShopContext context)
     {
         var view = FindFirstObjectByType<CardSceneView>();
-        Presenter = new CardScenePresenter(shopConfigModel, purchaseController, view, cardIndex, dataObserver);
+        Presenter = new CardScenePresenter(context.ShopModel, context.PurchaseController, view, context.ShopPreferences.SelectedCardIndex, context.PlayerObserver);
         Presenter.Enable();
         Presenter.CloseButtonClicked += CloseScene;
     }
@@ -24,6 +26,6 @@ public class CardSceneBootstrapper : MonoBehaviour
     {
         Presenter.CloseButtonClicked -= CloseScene;
         Presenter.Disable();
-        _ = SceneManager.UnloadSceneAsync(gameObject.scene);
+        SceneManager.UnloadScene(gameObject.scene);
     }
 }

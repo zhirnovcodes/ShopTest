@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class PlayerData : IPlayerData, IPlayerAllData, IPlayerDataObserver
+public class PlayerData : IPlayerData, IPlayerDataEnumerator, IPlayerDataObserver
 {
     private Dictionary<Type, object> Data = new Dictionary<Type, object>();
 

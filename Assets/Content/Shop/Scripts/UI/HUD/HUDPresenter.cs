@@ -1,11 +1,11 @@
 public class HUDPresenter
 {
-    private readonly IPlayerAllData PlayerAllData;
+    private readonly IPlayerDataEnumerator PlayerAllData;
     private readonly HUDView View;
     private readonly IPlayerDataObserver DataObserver;
     private readonly IPlayerData PlayerData;
 
-    public HUDPresenter(IPlayerAllData playerAllData, HUDView view, IPlayerDataObserver dataObserver, IPlayerData playerData)
+    public HUDPresenter(IPlayerDataEnumerator playerAllData, HUDView view, IPlayerDataObserver dataObserver, IPlayerData playerData)
     {
         PlayerAllData = playerAllData;
         View = view;

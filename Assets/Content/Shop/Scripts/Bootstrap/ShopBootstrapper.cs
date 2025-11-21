@@ -15,7 +15,7 @@ public class ShopBootstrapper : MonoBehaviour
     private IPlayerDataObserver PlayerObserver;
     private ShopPreferences ShopPreferences;
     private IPlayerData PlayerData;
-    private IPlayerAllData PlayerAllData;
+    private IPlayerDataEnumerator PlayerAllData;
     private ShopBoardPresenter Presenter;
 
     void Start()
@@ -58,7 +58,7 @@ public class ShopBootstrapper : MonoBehaviour
     private void CreatePlayerData()
     {
         PlayerData = new PlayerData();
-        PlayerAllData = PlayerData as IPlayerAllData;
+        PlayerAllData = PlayerData as IPlayerDataEnumerator;
         PlayerObserver = PlayerData as IPlayerDataObserver;
     }
 

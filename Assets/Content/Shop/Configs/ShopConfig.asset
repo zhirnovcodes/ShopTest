@@ -29,10 +29,10 @@ MonoBehaviour:
     Actions:
     - {fileID: 11400000, guid: 7df7b6b4f6b4bde47933ec9c16028ceb, type: 2}
     - {fileID: 11400000, guid: e5591358fdbbca64191eb13934f2c303, type: 2}
-  - Name: Loose all health and get 15 gold and 30 sec of VIP time
+  - Name: Loose all health and get 10 gold and 30 sec of VIP time
     Actions:
     - {fileID: 11400000, guid: ce72ac0cb3ce2104aa78c34404e3b930, type: 2}
-    - {fileID: 11400000, guid: bf1185c99820ebe449aed92970870c3f, type: 2}
+    - {fileID: 11400000, guid: e5591358fdbbca64191eb13934f2c303, type: 2}
     - {fileID: 11400000, guid: d2404a652a01d2247bff4e013d49e3fb, type: 2}
   - Name: Loose half of health and go to Factory
     Actions:

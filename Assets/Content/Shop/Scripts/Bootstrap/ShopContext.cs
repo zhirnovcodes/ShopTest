@@ -2,11 +2,11 @@
 
 public class ShopContext : MonoBehaviour
 {
-    public ShopConfigModel ShopModel;
-    public IPurchaseController PurchaseController;
-    public IPlayerDataObserver PlayerObserver;
-    public ShopPreferences ShopPreferences;
-    public ShopSceneManager SceneManager;
+    public ShopConfigModel ShopModel { get; private set; }
+    public IPurchaseController PurchaseController { get; private set; }
+    public IPlayerDataObserver PlayerObserver { get; private set; }
+    public ShopPreferences ShopPreferences { get; private set; }
+    public ShopSceneManager SceneManager { get; private set; }
 
     private void Awake()
     {

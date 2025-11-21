@@ -7,12 +7,17 @@ public class ShopBoardPresenter
     private ShopConfigModel Config;
     private ShopBoardView View;
     private IPurchaseController PurchaseController;
+    private IPlayerDataObserver DataObserver;
 
-    public ShopBoardPresenter(ShopConfigModel config, ShopBoardView view, IPurchaseController purchaseController)
+    public ShopBoardPresenter(ShopConfigModel config, 
+        ShopBoardView view, 
+        IPurchaseController purchaseController,
+        IPlayerDataObserver dataObserver)
     {
         Config = config;
         View = view;
         PurchaseController = purchaseController;
+        DataObserver = dataObserver;
     }
 
     public void Enable()
@@ -22,12 +27,23 @@ public class ShopBoardPresenter
         AddCards();
 
         PurchaseController.PurchaseComplete += HandlePurchaseComplete;
+        DataObserver.DataChanged += HandleDataChanged;
     }
 
     public void Disable()
     {
         View.Disable();
         PurchaseController.PurchaseComplete -= HandlePurchaseComplete;
+        DataObserver.DataChanged -= HandleDataChanged;
+    }
+
+    public void UpdateAllStates()
+    {
+        for (int i = 0; i < Config.GetItemsCount(); i++)
+        {
+            var button = View.GetCard(i);
+            UpdateCardState(i, button);
+        }
     }
 
     private void HandlePurchaseComplete(int index)
@@ -84,11 +100,21 @@ public class ShopBoardPresenter
     private void HandleBuyButtonClicked(int index)
     {
         var card = View.GetCard(index);
+        PurchaseController.Purchase(index);
         UpdateCardState(index, card);
     }
 
     private void HandleInfoButtonClicked(int index)
     {
         InfoButtonClicked(index);
+    }
+
+    private void HandleDataChanged()
+    {
+        for (int i = 0; i < View.GetCardsCount(); i++)
+        {
+            var card = View.GetCard(i);
+            UpdateCardState(i, card);
+        }
     }
 }

@@ -16,3 +16,6 @@ MonoBehaviour:
   - Name: Remove 10 health
     Actions:
     - {fileID: 11400000, guid: 4891e6ed51610ad4586080f6bebf9b90, type: 2}
+  - Name: Add 10 gold
+    Actions:
+    - {fileID: 11400000, guid: ce72ac0cb3ce2104aa78c34404e3b930, type: 2}

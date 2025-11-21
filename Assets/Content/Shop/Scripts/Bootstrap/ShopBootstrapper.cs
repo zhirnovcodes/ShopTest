@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,18 +6,22 @@ public class ShopBootstrapper : MonoBehaviour
 {
     public ShopConfig ShopConfig;
     public ShopBoardView View;
+    public HUDView HUDView;
 
     private ShopConfigModel ShopModel;
     private IPlayerData PlayerData;
+    private IPlayerAllData PlayerAllData;
+    private IPlayerDataObserver PlayerObserver;
     private IPurchaseController PurchaseController;
+    private ShopBoardPresenter Presenter;
 
     void Start()
     {
         CreateConfigModel();
         CreatePlayerData();
         CreatePurchaseController();
-        CreateHUD();
         CreateShopUI();
+        CreateHUD();
     }
 
     private void CreateConfigModel()
@@ -27,6 +32,8 @@ public class ShopBootstrapper : MonoBehaviour
     private void CreatePlayerData()
     {
         PlayerData = new PlayerData();
+        PlayerAllData = PlayerData as IPlayerAllData;
+        PlayerObserver = PlayerData as IPlayerDataObserver;
     }
 
     private void CreatePurchaseController()
@@ -39,11 +46,13 @@ public class ShopBootstrapper : MonoBehaviour
 
     private void CreateHUD()
     {
+        var hudPresenter = new HUDPresenter(PlayerAllData, HUDView, PlayerObserver, PlayerData);
+        hudPresenter.Enable();
     }
 
     private void CreateShopUI()
     {
-        var presenter = new ShopBoardPresenter(ShopModel, View, PurchaseController);
+        var presenter = new ShopBoardPresenter(ShopModel, View, PurchaseController, PlayerObserver);
         presenter.Enable();
         presenter.InfoButtonClicked += HandleInfoButtonClicked;
     }
@@ -55,8 +64,13 @@ public class ShopBootstrapper : MonoBehaviour
 
     private void ShowCardScene(int cardIndex)
     {
-        SceneManager.LoadScene("CardPresent", LoadSceneMode.Additive);
+        _ = ShowCardSceneAsync(cardIndex);
+    }
+
+    private async Task ShowCardSceneAsync(int cardIndex)
+    {
+        await SceneManager.LoadSceneAsync("CardPresent", LoadSceneMode.Additive);
         var bootstrapper = FindFirstObjectByType<CardSceneBootstrapper>();
-        bootstrapper.Run(ShopModel, PurchaseController, cardIndex);
+        bootstrapper.Run(ShopModel, PurchaseController, cardIndex, PlayerObserver);
     }
 }

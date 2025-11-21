@@ -5,6 +5,7 @@ public class CardScenePresenter
     public event Action CloseButtonClicked = () => { };
 
     private readonly IPurchaseController PurchaseController;
+    private readonly IPlayerDataObserver DataObserver;
     private readonly CardSceneView View;
     private readonly int ItemIndex;
     private ShopCardView Card;
@@ -13,9 +14,11 @@ public class CardScenePresenter
         ShopConfigModel shopConfigModel,
         IPurchaseController purchaseController,
         CardSceneView view,
-        int itemIndex)
+        int itemIndex,
+        IPlayerDataObserver dataObserver)
     {
         PurchaseController = purchaseController;
+        DataObserver = dataObserver;
         View = view;
         ItemIndex = itemIndex;
 
@@ -40,6 +43,7 @@ public class CardScenePresenter
         View.Enable();
 
         View.CloseClicked += HandleCloseClicked;
+        DataObserver.DataChanged += HandleDataChanged;
     }
 
     public void Disable()
@@ -49,6 +53,7 @@ public class CardScenePresenter
         View.Disable();
 
         View.CloseClicked -= HandleCloseClicked;
+        DataObserver.DataChanged -= HandleDataChanged;
     }
 
     private void ChangeCardState()
@@ -86,5 +91,10 @@ public class CardScenePresenter
     private void HandleCloseClicked()
     {
         CloseButtonClicked();
+    }
+
+    private void HandleDataChanged()
+    {
+        ChangeCardState();
     }
 }

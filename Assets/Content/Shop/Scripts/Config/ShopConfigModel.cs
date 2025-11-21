@@ -19,7 +19,7 @@
 
     public bool CanBuyItem(int index, IPlayerData data)
     {
-        var result = false;
+        var result = true;
 
         foreach (var action in Config.Bundles[index].Actions)
         {
@@ -35,5 +35,6 @@
         {
             action.Apply(data);
         }
+        data.Update();
     }
 }

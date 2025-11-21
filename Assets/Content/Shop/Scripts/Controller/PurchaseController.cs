@@ -36,9 +36,9 @@ public class PurchaseController : MonoBehaviour, IPurchaseController
 
         Config.BuyItem(index, Data);
 
-        PurchaseComplete(index);
-
         RunningPurchases.Remove(index);
+
+        PurchaseComplete(index);
     }
 
     public bool CanPurchaseItem(int index)

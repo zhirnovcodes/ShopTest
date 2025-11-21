@@ -14,6 +14,6 @@
 
     public void TestAdd()
     {
-        Value++;
+        Value+=10;
     }
 }

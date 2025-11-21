@@ -7,16 +7,17 @@ public class CardSceneBootstrapper : MonoBehaviour
 
     public void Run(ShopConfigModel shopConfigModel,
         IPurchaseController purchaseController,
-        int cardIndex)
+        int cardIndex,
+        IPlayerDataObserver dataObserver)
     {
-        CreateCardSceneView(shopConfigModel, purchaseController, cardIndex);
+        CreateCardSceneView(shopConfigModel, purchaseController, cardIndex, dataObserver);
     }
 
     private void CreateCardSceneView(ShopConfigModel shopConfigModel,
-        IPurchaseController purchaseController, int cardIndex)
+        IPurchaseController purchaseController, int cardIndex, IPlayerDataObserver dataObserver)
     {
         var view = FindFirstObjectByType<CardSceneView>();
-        Presenter = new CardScenePresenter(shopConfigModel, purchaseController, view, cardIndex);
+        Presenter = new CardScenePresenter(shopConfigModel, purchaseController, view, cardIndex, dataObserver);
         Presenter.Enable();
         Presenter.CloseButtonClicked += CloseScene;
     }
@@ -25,6 +26,6 @@ public class CardSceneBootstrapper : MonoBehaviour
     {
         Presenter.CloseButtonClicked -= CloseScene;
         Presenter.Disable();
-        SceneManager.UnloadSceneAsync(gameObject.scene);
+        _ = SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

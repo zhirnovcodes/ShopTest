@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class PlayerData : IPlayerData, IPlayerAllData
+public class PlayerData : IPlayerData, IPlayerAllData, IPlayerDataObserver
 {
     private Dictionary<Type, object> Data = new Dictionary<Type, object>();
 
-    public IEnumerator<IPlayerElementData> GetAllData()
+    public event Action DataChanged = () => { };
+
+    public IEnumerable<IPlayerElementData> GetAllData()
     {
         foreach (var data in Data.Values)
         {
@@ -28,6 +30,11 @@ public class PlayerData : IPlayerData, IPlayerAllData
     public void Load()
     {
         // loads Data from JSON
+    }
+
+    public void Update()
+    {
+        DataChanged();
     }
 }
 

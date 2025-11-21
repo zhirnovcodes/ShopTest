@@ -48,8 +48,7 @@ public class ShopBoardPresenter
 
     private void HandlePurchaseComplete(int index)
     {
-        var card = View.GetCard(index);
-        UpdateCardState(index, card);
+        UpdateAllStates();
     }
 
     private void AddCards()
@@ -59,8 +58,9 @@ public class ShopBoardPresenter
             var button = View.AddCard();
 
             SetupCard(i, button);
-            UpdateCardState(i, button);
         }
+
+        UpdateAllStates();
     }
 
     private void SetupCard(int index, ShopCardView card)
@@ -87,7 +87,7 @@ public class ShopBoardPresenter
             button.SetBuyUnlickable();
         }
 
-        if (PurchaseController.GetPurchaseIsInProgress(index))
+        if (PurchaseController.GetPurchaseIsInProgress())
         {
             button.SetWaiting();
         }
@@ -99,9 +99,8 @@ public class ShopBoardPresenter
 
     private void HandleBuyButtonClicked(int index)
     {
-        var card = View.GetCard(index);
         PurchaseController.Purchase(index);
-        UpdateCardState(index, card);
+        UpdateAllStates();
     }
 
     private void HandleInfoButtonClicked(int index)
@@ -111,10 +110,6 @@ public class ShopBoardPresenter
 
     private void HandleDataChanged()
     {
-        for (int i = 0; i < View.GetCardsCount(); i++)
-        {
-            var card = View.GetCard(i);
-            UpdateCardState(i, card);
-        }
+        UpdateAllStates();
     }
 }

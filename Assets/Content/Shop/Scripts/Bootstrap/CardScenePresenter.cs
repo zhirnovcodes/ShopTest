@@ -58,7 +58,7 @@ public class CardScenePresenter
 
     private void ChangeCardState()
     {
-        if (PurchaseController.GetPurchaseIsInProgress(ItemIndex))
+        if (PurchaseController.GetPurchaseIsInProgress())
         {
             Card.SetWaiting();
         }

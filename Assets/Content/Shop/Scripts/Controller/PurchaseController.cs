@@ -10,7 +10,7 @@ public class PurchaseController : MonoBehaviour, IPurchaseController
     private ShopConfigModel Config;
     private IPlayerData Data;
 
-    private HashSet<int> RunningPurchases = new HashSet<int>();
+    private bool IsRunningPurchases;
 
     public void Initialize(ShopConfigModel config, IPlayerData data)
     {
@@ -18,9 +18,9 @@ public class PurchaseController : MonoBehaviour, IPurchaseController
         Data = data;
     }
 
-    public bool GetPurchaseIsInProgress(int index)
+    public bool GetPurchaseIsInProgress()
     {
-        return RunningPurchases.Contains(index);
+        return IsRunningPurchases;
     }
 
     public void Purchase(int index)
@@ -30,13 +30,13 @@ public class PurchaseController : MonoBehaviour, IPurchaseController
 
     public IEnumerator PurchaseCoroutine(int index)
     {
-        RunningPurchases.Add(index);
+        IsRunningPurchases = true;
 
         yield return new WaitForSeconds(3);
 
         Config.BuyItem(index, Data);
 
-        RunningPurchases.Remove(index);
+        IsRunningPurchases = false;
 
         PurchaseComplete(index);
     }

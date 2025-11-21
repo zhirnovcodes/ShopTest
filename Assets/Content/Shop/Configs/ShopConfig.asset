@@ -19,3 +19,10 @@ MonoBehaviour:
   - Name: Add 10 gold
     Actions:
     - {fileID: 11400000, guid: ce72ac0cb3ce2104aa78c34404e3b930, type: 2}
+  - Name: Remove 1 min of VIP
+    Actions:
+    - {fileID: 11400000, guid: 0fd008bf478935e4f9d52e4a2b2395e5, type: 2}
+  - Name: Teleport to factory
+    Actions:
+    - {fileID: 11400000, guid: 5ad42722e68ef5d47b419a51d2a4eb38, type: 2}
+    - {fileID: 11400000, guid: 4891e6ed51610ad4586080f6bebf9b90, type: 2}
